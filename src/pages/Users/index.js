@@ -1,40 +1,20 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Styled from './styled.components'
-import { startLoading, stopLoading } from '../../reducers/loading'
-import { addUsers } from '../../reducers/users'
-import API from '../../api'
+import { fetchUsers } from '../../reducers/users'
 
 const Users = () => {
-  const { users } = useSelector(state => state.users)
-  const { loading: isLoading } = useSelector(state => state.loader)
+  const { users, loading: isLoading } = useSelector(state => state.users)
   const dispatch = useDispatch()
   const handleClick = () => {
-    console.log(users)
+    dispatch(fetchUsers())
   }
-
-  useEffect(() => {
-    const fetchUsers = () => {
-      dispatch(startLoading())
-      API.get('/users')
-        .then(resp => {
-          dispatch(addUsers(resp.data.users))
-        })
-        .catch(err => {
-          console.log(err)
-        })
-        .finally(() => {
-          dispatch(stopLoading())
-        })
-    }
-    fetchUsers()
-  }, [dispatch])
 
   return (
     <Styled.Container>
       <Styled.Title>Dummy Users</Styled.Title>
       <Styled.ButtonWrapper>
-        <Styled.LoadButton onClick={handleClick}>Log Users</Styled.LoadButton>
+        <Styled.LoadButton onClick={handleClick}>Load Users</Styled.LoadButton>
       </Styled.ButtonWrapper>
       <Styled.UsersContainer>
         {isLoading && <Styled.LoadingText>Loading</Styled.LoadingText>}
