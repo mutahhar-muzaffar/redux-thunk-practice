@@ -1,15 +1,20 @@
-import { IS_LOADING, IS_NOT_LOADING } from '../actions/loading'
-const loadingReducer = (state = false, action) => {
-  switch (action.type) {
-    case IS_LOADING:
-      return true
+import { createSlice } from '@reduxjs/toolkit'
 
-    case IS_NOT_LOADING:
-      return false
+const initialState = { loading: false }
 
-    default:
-      return state
+const loadingSlice = createSlice({
+  name: 'loader',
+  initialState,
+  reducers: {
+    startLoading: state => {
+      state.loading = true
+    },
+    stopLoading: state => {
+      state.loading = false
+    }
   }
-}
+})
 
-export default loadingReducer
+export const { startLoading, stopLoading } = loadingSlice.actions
+
+export default loadingSlice.reducer

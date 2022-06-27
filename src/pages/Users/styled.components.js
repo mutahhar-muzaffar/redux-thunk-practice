@@ -41,10 +41,6 @@ export const LoadingText = styled(Title).attrs({
 `
 
 export const UsersContainer = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
   min-height: 500px;
   overflow: auto;
   padding: 2rem 0;
