@@ -21,7 +21,7 @@ const Users = () => {
         {!isLoading &&
           users &&
           users.map(user => (
-            <Styled.UserCard>
+            <Styled.UserCard key={user.id}>
               <Styled.UserTitle>{user.username}</Styled.UserTitle>
               <p>Age: {user.age}</p>
             </Styled.UserCard>
