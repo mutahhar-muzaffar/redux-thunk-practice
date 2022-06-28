@@ -1,15 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Styled from './styled.components'
-import { fetchUsers } from '../../actions/users'
+import { fetchUsers } from '../../reducers/users'
 
 const Users = () => {
-  const users = useSelector(state => state.users)
-  const isLoading = useSelector(state => state.loading)
+  const { users, loading: isLoading } = useSelector(state => state.users)
   const dispatch = useDispatch()
   const handleClick = () => {
     dispatch(fetchUsers())
   }
+
   return (
     <Styled.Container>
       <Styled.Title>Dummy Users</Styled.Title>
@@ -21,7 +21,7 @@ const Users = () => {
         {!isLoading &&
           users &&
           users.map(user => (
-            <Styled.UserCard>
+            <Styled.UserCard key={user.id}>
               <Styled.UserTitle>{user.username}</Styled.UserTitle>
               <p>Age: {user.age}</p>
             </Styled.UserCard>
